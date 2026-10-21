@@ -2,11 +2,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ["AssetManagementAPI/AssetManagementAPI.csproj", "AssetManagementAPI/"]
-RUN dotnet restore "AssetManagementAPI/AssetManagementAPI.csproj"
+COPY ["AssetManagementAPI.csproj", "./"]
+RUN dotnet restore "AssetManagementAPI.csproj"
 
 COPY . .
-WORKDIR "/src/AssetManagementAPI"
 RUN dotnet build "AssetManagementAPI.csproj" -c Release -o /app/build
 RUN dotnet publish "AssetManagementAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
